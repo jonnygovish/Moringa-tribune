@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  {% if title %}
+  <title>Moringa Tribune - {{title}}</title>
+  {% else %}
+    <title> Moringa Tribune </title>
+  {% endif %}
+
+</head>
+<body>
+    {% block content %} <h1>News for {{date|date:"l d-F Y"}}</h1> {%endblock%}
+</body>
+</html>
