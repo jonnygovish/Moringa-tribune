@@ -22,7 +22,17 @@
 
     {% include "navbar.html" %}
 
-    {% block content %} <h1 class='text-center'>News for {{date|date:"l d-F Y"}}</h1> {%endblock%}
+    {% block content %} 
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <h1 class=>News for {{date|date:"l d-F Y"}}</h1> 
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+    {%endblock%}
 
     {% block scripts %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
