@@ -1,4 +1,5 @@
 {%extends 'all-news/base.html'%}
+{% load static %}
 {% load bootstrap4 %}
 {% block content %}
 {{block.super}}
@@ -6,38 +7,39 @@
 <div class="container">
 
     <!-- Looping through news   -->
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
     {% for news_item in news %}
-  
-    <div class="row">
       <!-- displaying News articles -->
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <h2 class="text-center"> {{ news_item.title }} </h2>
-        <p>{{news_item.post}} </p>
+        <a href="{% url 'article' news_item.id %} "><h2 class="text-center"> {{ news_item.title }} </h2></a>
+        <p class="text-center">{{news_item.post|truncatechars:200}} </p>
+      {% empty %}
+        <h2 class="text-center">There No News Items</h2>
+      <!-- Looping through news end   -->
+      {% endfor %}
       </div>
-       <!--Display news Article images  -->
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-        <img src="{{news_item.article_image.url}}" class="img-responsive" alt="Image">
-      </div>
-  
+      <div class="col-md-2">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Subscribe for a Newsletter!!</h5>
+              {% comment %} <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> {% endcomment %}
+              <p class="card-text"></p>
+              <form  action="{%url 'newsToday'%}" method="post" class="card-text">
+                {%csrf_token%}
+          
+                {% bootstrap_form letterForm layout='inline' %}
+                <input type="submit" value="Subscribe">
+              </form>
+            </div>
+          </div>
+        </div>
     </div>
+</div>
   
-    {% empty %}
-    <div class="row">
-      <h2 class="text-center">There No News Items</h2>
-    </div>
-    {% endfor %}
+{% endblock %}
 
-    <!-- Looping through news end   -->
-  <div class="container-fluid">
-
-    <form  action="{%url 'newsToday'%}" method="post">
-      {%csrf_token%}
-
-      {% bootstrap_form letterForm layout='inline' %}
-      <input type="submit" value="Subscribe">
-    </form>
-    
-  </div>
-  
-
+{% block scripts %} 
+  {{block.super}}
+  <script type="text/javascript" src="{%static 'js/newsletter.js'%}"></script>
 {% endblock %}

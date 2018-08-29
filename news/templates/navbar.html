@@ -29,13 +29,16 @@
     <div>
             {% if user.is_authenticated %}
             <ul>
-              <li class="dropdown">
+              <li class="dropdown" style="list-style:none;">
                 <a href="#" class="dropdown-toggle btn btn-dark" data-toggle="dropdown" role="button" aria-expanded="false">Account
                           <span class="caret"></span>
                       </a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
                     <a href="{%url 'newsToday'%}">Home</a>
+                  </li>
+                  <li>
+                    <a href="{%url 'new-article'%}">Create Article</a>
                   </li>
                   <li>
                     <a href="/accounts/password/change">Change Password</a>
@@ -47,8 +50,8 @@
               </li>
             </ul>
             {% else %}
-            <li>
-              <a class='btn btn-default' href="/accounts/login">Login</a>
+            <li style="list-style:none;">
+              <a class='btn btn-dark' href="/accounts/login">Login</a>
             </li>
 
             {% endif %}
